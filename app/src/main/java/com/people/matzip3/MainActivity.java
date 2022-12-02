@@ -1,11 +1,18 @@
 package com.people.matzip3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -15,23 +22,61 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Handler;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ArrayList<MainData> arrayList;
+    private MainAdapter mainAdapter;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+
     private TextView textView_title, textView_release, textView_director;
+    private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        recyclerView = (RecyclerView) findViewById(R.id.rv);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+
+        arrayList = new ArrayList<>();
+
+        mainAdapter = new MainAdapter(arrayList);
+        recyclerView.setAdapter(mainAdapter);
+
+        /*
+        // 버튼 클릭 시
+        Button btn = (Button) findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainData mainData = new MainData(R.mipmap.ic_launcher, "가게이름", "메뉴", "주소");
+                arrayList.add(mainData);
+                mainAdapter.notifyDataSetChanged(); // 새로고침
+            }
+        });
+
+         */
+
         textView_title = (TextView) findViewById(R.id.textView_title);
         textView_release = (TextView) findViewById(R.id.textView_release);
         textView_director = (TextView) findViewById(R.id.textView_director);
+        list = (ListView) findViewById(R.id.list);
+
+        List<String> data = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
+        list.setAdapter(adapter);
+        data.add("홍드로이드");
+
 
         WeatherConnection weatherConnection = new WeatherConnection();
-        
+
         AsyncTask<String, String, String> result = weatherConnection.execute("","");
 
         System.out.println("RESULT");
