@@ -2,13 +2,13 @@ package com.people.matzip3;
 
 public class MainData {
 
-    private int img;
+    private String img;
     private String tv_name;
     private String tv_menu;
     private String tv_addr;
 
 
-    public MainData(int img, String tv_name, String tv_menu, String tv_addr) {
+    public MainData(String img, String tv_name, String tv_menu, String tv_addr) {
         this.img = img;
         this.tv_name = tv_name;
         this.tv_menu = tv_menu;
@@ -16,11 +16,11 @@ public class MainData {
     }
 
 
-    public int getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         this.img = img;
     }
 

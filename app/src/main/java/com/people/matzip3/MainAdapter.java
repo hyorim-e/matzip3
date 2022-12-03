@@ -33,7 +33,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
     @Override
     // 뷰홀더 추가될 때 생명 주기
     public void onBindViewHolder(@NonNull MainAdapter.CustomViewHolder holder, int position) {
-        holder.img.setImageResource(arrayList.get(position).getImg());
+        //holder.img.setImageResource(arrayList.get(position).getImg());
+//        MyAppGlideModule.with(holder.itemView).load(arrayList.get(position).getImg())
+//                .override(300,400)
+//                .into(holder.img);
+        GlideApp.with(holder.itemView).load(arrayList.get(position).getImg())
+                .override(300,400)
+                .into(holder.img);
         holder.tv_name.setText(arrayList.get(position).getTv_name());
         holder.tv_menu.setText(arrayList.get(position).getTv_menu());
         holder.tv_addr.setText(arrayList.get(position).getTv_addr());

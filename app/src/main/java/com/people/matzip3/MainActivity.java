@@ -185,19 +185,20 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(url).get();
 
                 Element today_list = doc.select("div.basic-post-gallery").first();
-                System.out.println("today_list = "+ today_list);
+                //System.out.println("today_list = "+ today_list);
 
-                Elements today_list_content = today_list.select("div.post-content");
-                System.out.println("today_list_content = "+ today_list_content);
-                int today_shop_count = today_list_content.size(); // 오늘 가게 개수
-                for (int i=0; i<today_shop_count*4;){
-                    Elements shop_info = today_list.select("div.post-subject"); // 0123, 4567, 891011 +4단위 같은 name, menu, addr
-                    //String imgUrl = shop_info.eq(i).text();
-                    int imgUrl = 1;
-                    String shop_name = shop_info.eq(i+1).text();
-                    String shop_menu = shop_info.eq(i+2).text();
-                    String shop_addr = shop_info.eq(i+3).text();
-                    i = i+4;
+                Elements today_listItems = today_list.select("div.post-list"); // post-image(이미지), post-content(이름, 주소 등 내용)로 나뉨
+                //System.out.println("today_list_content = "+ today_list_content);
+                int today_shop_count = today_listItems.size(); // 오늘 가게 개수
+
+                for (int i=0; i<today_shop_count; i++){
+                    String imgUrl = today_listItems.select("img").eq(i).attr("src");
+
+                    Elements shop_content = today_list.select("div.post-subject"); // 0123, 4567, 891011 +4단위 같은 name, menu, addr
+                    String shop_name = shop_content.eq(i*4+1).text();
+                    String shop_menu = shop_content.eq(i*4+2).text();
+                    String shop_addr = shop_content.eq(i*4+3).text();
+
                     arrayList.add(new MainData(imgUrl, shop_name, shop_menu, shop_addr));
                     Log.d("items", "img: " + imgUrl + ", shop_name: " + shop_name + ", shop_menu: " + shop_menu + ", shop_addr: " + shop_addr);
                 }
