@@ -38,7 +38,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
 //                .override(300,400)
 //                .into(holder.img);
         GlideApp.with(holder.itemView).load(arrayList.get(position).getImg())
-                .override(300,400)
+                .override(500,400)
                 .into(holder.img);
         holder.tv_name.setText(arrayList.get(position).getTv_name());
         holder.tv_menu.setText(arrayList.get(position).getTv_menu());
