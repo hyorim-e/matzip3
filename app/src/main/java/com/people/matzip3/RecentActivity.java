@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -27,6 +30,7 @@ public class RecentActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
 
     private Button btn_today;
+    private Button btn_copy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,23 @@ public class RecentActivity extends AppCompatActivity {
                 startActivity(intent); // 액티비티 이동
             }
         });
+
+        /*btn_copy = (Button) findViewById(R.id.btn_copy);
+        btn_copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createClipData(arrayList.get(0).getTv_name() + "\n" + arrayList.get(0).getTv_addr());
+            }
+        });*/
     }
+
+    /*public void createClipData(String message){
+        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+        ClipData clipData = ClipData.newPlainText("Paste", message);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(this, "복사되었습니다.", Toast.LENGTH_LONG).show();
+    }*/
 
     private class Content extends AsyncTask<Void, Void, Void> {
 

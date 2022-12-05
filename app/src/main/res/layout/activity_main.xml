@@ -24,11 +24,20 @@
         android:gravity="center">
 
         <Button
+            android:id="@+id/btn_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="복사"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            android:layout_marginRight="5dp"/>
+
+        <Button
             android:id="@+id/btn_today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="오늘 방송"
-            android:textSize="39dp"
+            android:textSize="28dp"
             android:textStyle="bold"
             android:layout_marginRight="5dp"/>
         <Button
@@ -36,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="최근 방송"
-            android:textSize="39dp"
+            android:textSize="28dp"
             android:textStyle="bold"/>
     </LinearLayout>
 

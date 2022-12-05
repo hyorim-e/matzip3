@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private MainAdapter mainAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-
     private Button btn_recent;
+    private Button btn_copy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setHasFixedSize(true); // 외국유튜브 코드 추가
         recyclerView.setLayoutManager(linearLayoutManager);
-
         arrayList = new ArrayList<>();
 
         mainAdapter = new MainAdapter(arrayList);
@@ -58,13 +57,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent a = new Intent(getIntent());
-        String pasteText = a.getStringExtra("복사");
-
-        recyclerView.setOnClickListener(new View.OnClickListener() {
+        btn_copy = (Button) findViewById(R.id.btn_copy);
+        btn_copy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 createClipData(arrayList.get(0).getTv_name() + "\n" + arrayList.get(0).getTv_addr());
                 //arrayList.get(position).getTv_name()
                 //createClipData(pasteText);

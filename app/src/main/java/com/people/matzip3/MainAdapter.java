@@ -50,16 +50,15 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), pasteText, Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
         // 리스트뷰 길게 클릭 시
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
                 return false;
             }
-        });*/
+        });
     }
 
     @Override
