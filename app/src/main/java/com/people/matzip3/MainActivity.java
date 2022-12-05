@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 String url = "https://www.menutong.com/";
                 Document doc = Jsoup.connect(url).get();
 
+                // 오늘 맛집 리스트
                 Element today_list = doc.select("div.basic-post-gallery").first();
                 //System.out.println("today_list = "+ today_list);
 
@@ -86,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
 
                     arrayList.add(new MainData(imgUrl, shop_name, shop_menu, shop_addr));
                     Log.d("items", "img: " + imgUrl + ", shop_name: " + shop_name + ", shop_menu: " + shop_menu + ", shop_addr: " + shop_addr);
+
+                    //
                 }
+
 
             } catch (IOException e) {
                 e.printStackTrace();
