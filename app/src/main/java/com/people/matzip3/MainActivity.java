@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -54,6 +57,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent); // 액티비티 이동
             }
         });
+
+        Intent a = new Intent(getIntent());
+        String pasteText = a.getStringExtra("복사");
+
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                createClipData(arrayList.get(0).getTv_name() + "\n" + arrayList.get(0).getTv_addr());
+                //arrayList.get(position).getTv_name()
+                //createClipData(pasteText);
+            }
+        });
+    }
+
+    public void createClipData(String message){
+        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+        ClipData clipData = ClipData.newPlainText("Paste", message);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(this, "복사되었습니다.", Toast.LENGTH_LONG).show();
     }
 
     private class Content extends AsyncTask<Void, Void, Void> {
@@ -100,11 +124,8 @@ public class MainActivity extends AppCompatActivity {
 
                     arrayList.add(new MainData(imgUrl, shop_name, shop_menu, shop_addr));
                     Log.d("items", "img: " + imgUrl + ", shop_name: " + shop_name + ", shop_menu: " + shop_menu + ", shop_addr: " + shop_addr);
-
                     //
                 }
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

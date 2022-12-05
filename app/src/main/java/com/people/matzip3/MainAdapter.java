@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +25,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
     public MainAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
-
+        
         return holder;
     }
 
@@ -49,8 +48,16 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String curName = holder.tv_name.getText().toString();
-                Toast.makeText(v.getContext(), curName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), pasteText, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        // 리스트뷰 길게 클릭 시
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                return false;
             }
         });*/
     }
