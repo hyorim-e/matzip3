@@ -54,14 +54,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RecentActivity.class);
                 startActivity(intent); // 액티비티 이동
+                new Content().onCancelled();
             }
         });
 
+        //복사 버튼
         btn_copy = (Button) findViewById(R.id.btn_copy);
         btn_copy.setOnClickListener(new View.OnClickListener() {
+            private String copyText = "맛집 정보\n\n";
             @Override
             public void onClick(View v) {
-                createClipData(arrayList.get(0).getTv_name() + "\n" + arrayList.get(0).getTv_addr());
+                for(int i=0; i<arrayList.size(); i++){
+                    copyText += arrayList.get(i).getTv_name() + "\n" + arrayList.get(i).getTv_addr() + "\n\n";
+                }
+                createClipData(copyText);
+                //createClipData(arrayList.get(0).getTv_name() + "\n" + arrayList.get(0).getTv_addr());
                 //arrayList.get(position).getTv_name()
                 //createClipData(pasteText);
             }
@@ -71,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     public void createClipData(String message){
         ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-        ClipData clipData = ClipData.newPlainText("Paste", message);
+        ClipData clipData = ClipData.newPlainText("copy_main", message);
         clipboardManager.setPrimaryClip(clipData);
         Toast.makeText(this, "복사되었습니다.", Toast.LENGTH_LONG).show();
     }
