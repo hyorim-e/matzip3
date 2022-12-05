@@ -19,19 +19,19 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class RecentActivity extends AppCompatActivity {
 
     private ArrayList<MainData> arrayList;
     private MainAdapter mainAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
-    private Button btn_recent;
+    private Button btn_today;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_recent);
 
         recyclerView = (RecyclerView) findViewById(R.id.rv);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -43,14 +43,13 @@ public class MainActivity extends AppCompatActivity {
         mainAdapter = new MainAdapter(arrayList);
         recyclerView.setAdapter(mainAdapter);
 
-        // AsyncTask 작동시킴(파싱)
-        new Content().execute();
+        new RecentActivity.Content().execute();
 
-        btn_recent = (Button) findViewById(R.id.btn_recent);
-        btn_recent.setOnClickListener(new View.OnClickListener() {
+        btn_today = (Button) findViewById(R.id.btn_today);
+        btn_today.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RecentActivity.class);
+                Intent intent = new Intent(RecentActivity.this, MainActivity.class);
                 startActivity(intent); // 액티비티 이동
             }
         });
@@ -82,14 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 String url = "https://www.menutong.com/";
                 Document doc = Jsoup.connect(url).get();
 
-                // 오늘 맛집 리스트
-                Element today_list = doc.select("div.basic-post-gallery").first();
+                // 최근 맛집 리스트
+                Element today_list = doc.select("div.basic-post-gallery").get(1);
                 //System.out.println("today_list = "+ today_list);
 
                 Elements today_listItems = today_list.select("div.post-list"); // post-image(이미지), post-content(이름, 주소 등 내용)로 나뉨
                 //System.out.println("today_listItems = "+ today_listItems);
 
-                int today_shop_count = today_listItems.size(); // 오늘 가게 개수
+                int today_shop_count = today_listItems.size(); // 최근 가게 개수
                 for (int i=0; i<today_shop_count; i++){
                     String imgUrl = today_listItems.select("img").eq(i).attr("src");
 

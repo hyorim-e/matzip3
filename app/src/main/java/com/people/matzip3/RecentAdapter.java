@@ -12,18 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHolder> {
+public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.CustomViewHolder> {
 
     private ArrayList<MainData> arrayList;
 
-    public MainAdapter(ArrayList<MainData> arrayList) {
+    public RecentAdapter(ArrayList<MainData> arrayList) {
         this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    // 뷰홀더 만들어질 때 생명 주기
-    public MainAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecentAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
 
@@ -31,12 +30,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
     }
 
     @Override
-    // 뷰홀더 추가될 때 생명 주기
-    public void onBindViewHolder(@NonNull MainAdapter.CustomViewHolder holder, int position) {
-        //holder.img.setImageResource(arrayList.get(position).getImg());
-//        MyAppGlideModule.with(holder.itemView).load(arrayList.get(position).getImg())
-//                .override(300,400)
-//                .into(holder.img);
+    public void onBindViewHolder(@NonNull RecentAdapter.CustomViewHolder holder, int position) {
         GlideApp.with(holder.itemView).load(arrayList.get(position).getImg())
                 .override(500,400)
                 .into(holder.img);
